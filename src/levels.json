@@ -1,0 +1,10 @@
+[
+	{ "hated": 36000 },
+	{ "hostile": 3000 },
+	{ "unfriendly": 3000 },
+	{ "neutral": 3000 },
+	{ "friendly": 6000 },
+	{ "honored": 12000 },
+	{ "revered": 21000 },
+	{ "exalted": 10000 }
+]
