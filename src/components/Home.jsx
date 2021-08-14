@@ -16,8 +16,7 @@ export default function Home() {
 	}, [currentLevel]);
 
 	function currentRepBlurHandler() {
-		const level = levels.find(level => currentLevel in level);
-		const max = Object.values(level)[0];
+		const max = levels[currentLevel];
 		if (currentRep > max) setCurrentRep(max);
 	}
 
@@ -28,7 +27,7 @@ export default function Home() {
 	}
 
 	function getLevelKeys() {
-		return levels.map(level => Object.keys(level)[0]);
+		return Object.keys(levels);
 	}
 
 	return (

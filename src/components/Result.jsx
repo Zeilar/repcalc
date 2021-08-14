@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from "react";
+import { useMemo } from "react";
 import styled from "styled-components";
 import levels from "../levels.json";
 
@@ -6,14 +6,16 @@ import levels from "../levels.json";
  * @return Amount of days, clamped to 0
  */
 function calculateRep(currentLevel, currentRep, goal, perDay) {
+	const levelsArr = Object.entries(levels);
 	let goalRep = 0;
 
-	for (let i = 0; i < levels.findIndex(level => currentLevel in level); i++) {
-		currentRep += Object.values(levels[i])[0];
+	for (let i = 0; i < levelsArr.findIndex(level => level[0] === currentLevel); i++) {
+		console.log(levelsArr[i][1]);
+		currentRep += Object.values(levelsArr[i])[1];
 	}
 
-	for (let i = 0; i < levels.findIndex(level => goal in level); i++) {
-		goalRep += Object.values(levels[i])[0];
+	for (let i = 0; i < levelsArr.findIndex(level => level[0] === goal); i++) {
+		goalRep += Object.values(levelsArr[i])[1];
 	}
 
 	return Math.max(Math.ceil((goalRep - currentRep) / perDay), 0);
