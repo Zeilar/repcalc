@@ -1,0 +1,104 @@
+:root {
+	--main: 255, 225, 0;
+	--mainDark: 225, 200, 0;
+	--transparent: rgba(0, 0, 0, 0.65);
+}
+
+@font-face {
+	font-family: "LifeCraft";
+	src: url("/assets/fonts/LifeCraft.ttf");
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+::selection {
+	background-color: rgb(var(--main));
+	color: black;
+}
+
+body {
+	background-image: url("/assets/images/background.png");
+	background-size: cover;
+	font-family: "LifeCraft";
+	height: 100vh;
+	color: rgb(255, 225, 0);
+	&::after {
+		background-color: var(--transparent);
+		content: "";
+		position: fixed;
+		height: 100%;
+		width: 100%;
+		top: 0;
+		left: 0;
+		z-index: -1;
+	}
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-weight: normal;
+	text-transform: uppercase;
+}
+
+h1,
+h2 {
+	text-align: center;
+}
+
+input {
+	background-color: var(--transparent);
+	color: white;
+	margin-top: 0.25rem;
+	width: 10rem;
+	padding: 1rem;
+	font-size: 1.5rem;
+	border: 2px solid transparent;
+	outline: 0;
+
+	&:focus {
+		border-color: rgb(var(--main));
+	}
+
+	&[type="number"] {
+		-moz-appearance: textfield;
+		appearance: textfield;
+	}
+
+	&::-webkit-outer-spin-button,
+	&::-webkit-inner-spin-button {
+		-webkit-appearance: none;
+		appearance: none;
+		margin: 0;
+	}
+}
+
+h1 {
+	font-size: 4rem;
+	margin-bottom: 2rem;
+}
+
+h2 {
+	font-size: 3rem;
+	margin: 1rem 0;
+}
+
+h3 {
+	margin-top: 1rem;
+	font-size: 2rem;
+}
+
+a,
+button {
+	cursor: pointer;
+}
