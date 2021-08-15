@@ -45,7 +45,6 @@ export default function Home() {
 					</SelectBox>
 				))}
 			</SelectBoxes>
-			<h3>Current progress</h3>
 			<input
 				placeholder="Current progress"
 				onChange={e => setCurrentRep(Number(e.target.value))}
@@ -67,7 +66,7 @@ export default function Home() {
 					</SelectBox>
 				))}
 			</SelectBoxes>
-			<h3>I should get this much per day</h3>
+			<h2 style={{ marginTop: "3rem" }}>I should get this much reputation per day</h2>
 			<input
 				type="number"
 				value={perDay}
@@ -123,7 +122,7 @@ const SubmitButton = styled.button`
 	width: 15rem;
 	letter-spacing: 1px;
 	border: 2px solid black;
-	margin: 5rem auto 0 auto;
+	margin: 2rem auto 0 auto;
 	&:hover {
 		background-color: rgb(var(--mainDark));
 	}

@@ -2,15 +2,11 @@ import { useMemo } from "react";
 import styled from "styled-components";
 import levels from "../levels.json";
 
-/**
- * @return Amount of days, clamped to 0
- */
 function calculateRep(currentLevel, currentRep, goal, perDay) {
 	const levelsArr = Object.entries(levels);
 	let goalRep = 0;
 
 	for (let i = 0; i < levelsArr.findIndex(level => level[0] === currentLevel); i++) {
-		console.log(levelsArr[i][1]);
 		currentRep += Object.values(levelsArr[i])[1];
 	}
 
@@ -27,9 +23,9 @@ export default function Result({ location }) {
 	const currentLevel = params.get("currentLevel"),
 		currentRep = Number(params.get("currentRep")),
 		goal = params.get("goal"),
-		perDay = Number(params.get("perDay"));
+		perDay = Number(params.get("perDay")),
+		days = calculateRep(currentLevel, currentRep, goal, perDay);
 
-	const days = calculateRep(currentLevel, currentRep, goal, perDay);
 	return (
 		<div>
 			<InfoBox>
