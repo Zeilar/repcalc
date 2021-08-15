@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import levels from "../levels.json";
+import { Input, H1, H2 } from "../styles/styledComponents";
 
 export default function Home() {
 	const [currentLevel, setCurrentLevel] = useState(
@@ -49,48 +50,58 @@ export default function Home() {
 
 	return (
 		<Container>
-			<h1>How many days do I need to grind?</h1>
-			<h2>I am currently</h2>
-			<SelectBoxes>
-				{levelKeys.map((level, i) => (
-					<SelectBox
-						className={level === currentLevel ? "active" : null}
-						key={i}
-						onClick={() => setCurrentLevel(level)}
-					>
-						{level}
-					</SelectBox>
-				))}
-			</SelectBoxes>
-			<input
-				placeholder="Current progress"
-				onChange={e => setCurrentRep(Number(e.target.value))}
-				onBlur={currentRepBlurHandler}
-				min={0}
-				type="number"
-				value={currentRep}
-			/>
-			<h2>My goal is</h2>
-			<SelectBoxes>
-				{levelKeys.map((level, i) => (
-					<SelectBox
-						className={level === goal ? "active" : null}
-						key={i}
-						onClick={() => setGoal(level)}
-					>
-						{level}
-					</SelectBox>
-				))}
-			</SelectBoxes>
-			<h2 style={{ marginTop: "3rem" }}>I should get this much reputation per day</h2>
-			<input
-				onBlur={perDayBlurHandler}
-				min={1}
-				type="number"
-				value={perDay}
-				placeholder="Per day"
-				onChange={e => setPerDay(Number(e.target.value))}
-			/>
+			<H1>How many days do I need to grind?</H1>
+			<Grid>
+				<GridHeader>I am currently</GridHeader>
+				<SelectBoxes>
+					{levelKeys.map((level, i) => (
+						<SelectBox
+							className={level === currentLevel ? "active" : null}
+							key={i}
+							onClick={() => setCurrentLevel(level)}
+						>
+							{level}
+						</SelectBox>
+					))}
+				</SelectBoxes>
+				<CurrentRepInput>
+					<Input
+						placeholder="Current progress"
+						onChange={e => setCurrentRep(Number(e.target.value))}
+						onBlur={currentRepBlurHandler}
+						min={0}
+						type="number"
+						value={currentRep}
+					/>
+					<InputDivider>/</InputDivider>
+					<Input value={levels[currentLevel]} readOnly />
+				</CurrentRepInput>
+			</Grid>
+			<Grid>
+				<GridHeader>My goal is</GridHeader>
+				<SelectBoxes>
+					{levelKeys.map((level, i) => (
+						<SelectBox
+							className={level === goal ? "active" : null}
+							key={i}
+							onClick={() => setGoal(level)}
+						>
+							{level}
+						</SelectBox>
+					))}
+				</SelectBoxes>
+			</Grid>
+			<Grid>
+				<GridHeader>I should get this much reputation per day</GridHeader>
+				<PerDayInput
+					onBlur={perDayBlurHandler}
+					min={1}
+					type="number"
+					value={perDay}
+					placeholder="Per day"
+					onChange={e => setPerDay(Number(e.target.value))}
+				/>
+			</Grid>
 			<SubmitButton onClick={submit}>Run</SubmitButton>
 		</Container>
 	);
@@ -99,11 +110,9 @@ export default function Home() {
 const Container = styled.div`
 	display: flex;
 	flex-direction: column;
-	position: fixed;
-	transform: translate(-50%, -50%);
-	top: 50%;
-	left: 50%;
-	min-width: 1000px;
+	padding: 3rem;
+	max-width: 1000px;
+	margin: auto;
 `;
 
 const SelectBoxes = styled.div`
@@ -113,10 +122,10 @@ const SelectBoxes = styled.div`
 `;
 
 const SelectBox = styled.button`
-	font-family: "LifeCraft";
-	font-size: 1.5rem;
+	font: inherit;
+	font-size: 1rem;
 	user-select: none;
-	text-transform: capitalize;
+	text-transform: uppercase;
 	background-color: rgba(0, 0, 0, 0.65);
 	border: 2px solid transparent;
 	padding: 1rem 2rem;
@@ -144,4 +153,30 @@ const SubmitButton = styled.button`
 	&:hover {
 		background-color: rgb(var(--mainDark));
 	}
+`;
+
+const CurrentRepInput = styled.div`
+	background-color: var(--transparent);
+	width: fit-content;
+	margin: 0.5rem auto 0 auto;
+`;
+
+const InputDivider = styled.span`
+	margin: 0 0.5rem;
+	color: white;
+`;
+
+const Grid = styled.div`
+	display: flex;
+	flex-direction: column;
+	margin: 2rem 0;
+`;
+
+const GridHeader = styled(H2)`
+	margin-bottom: 1rem;
+`;
+
+const PerDayInput = styled(Input)`
+	background-color: var(--transparent);
+	margin: 0 auto;
 `;

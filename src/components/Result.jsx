@@ -1,6 +1,8 @@
 import { useMemo } from "react";
 import styled from "styled-components";
 import levels from "../levels.json";
+import { H1, H3 } from "../styles/styledComponents";
+import CountUp from "react-countup";
 
 function calculateRep(currentLevel, currentRep, goal, perDay) {
 	const levelsArr = Object.entries(levels);
@@ -27,17 +29,37 @@ export default function Result({ location }) {
 		days = calculateRep(currentLevel, currentRep, goal, perDay);
 
 	return (
-		<div>
-			<InfoBox>
-				<h2>Current level</h2>
-				<span>{currentLevel}</span>
-			</InfoBox>
-			<h1>{days} days</h1>
-		</div>
+		<Container>
+			<H3>
+				From{" "}
+				<HeaderBigParts>
+					{currentLevel} ({currentRep})
+				</HeaderBigParts>{" "}
+				to <HeaderBigParts>{goal}</HeaderBigParts> at{" "}
+				<HeaderBigParts>{perDay}</HeaderBigParts> reputation per day
+			</H3>
+			<ResultHeader>
+				<CountUp end={days} duration={0.5} />
+				<span> days</span>
+			</ResultHeader>
+		</Container>
 	);
 }
 
-const InfoBox = styled.div`
-	text-align: center;
-	background-color: var(--transparent);
+const Container = styled.div`
+	display: flex;
+	flex-direction: column;
+	margin: auto;
+	padding: 3rem;
+`;
+
+const ResultHeader = styled(H1)`
+	margin-top: 1rem;
+	font-family: "LifeCraft";
+	font-size: 4rem;
+	font-weight: normal;
+`;
+
+const HeaderBigParts = styled.span`
+	font-size: 2rem;
 `;
