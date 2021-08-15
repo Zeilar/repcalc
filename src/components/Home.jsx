@@ -33,7 +33,7 @@ export default function Home() {
 
 	function currentRepBlurHandler() {
 		const max = levels[currentLevel];
-		if (currentRep > max) setCurrentRep(max);
+		if (currentRep > max) setCurrentRep(max - 1);
 	}
 
 	function perDayBlurHandler() {
