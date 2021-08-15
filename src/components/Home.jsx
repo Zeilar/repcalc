@@ -169,7 +169,7 @@ const InputDivider = styled.span`
 const Grid = styled.div`
 	display: flex;
 	flex-direction: column;
-	margin: 2rem 0;
+	margin: 1rem 0;
 `;
 
 const GridHeader = styled(H2)`
