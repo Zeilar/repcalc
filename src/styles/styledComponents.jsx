@@ -39,3 +39,20 @@ export const H2 = styled.h2`
 export const H3 = styled.h3`
 	font-size: 1.5rem;
 `;
+
+export const Button = styled.button`
+	background-color: rgb(var(--main));
+	font-family: "LifeCraft";
+	font-size: 2.5rem;
+	padding: 0.5rem 1rem;
+	border-radius: 0.5rem;
+	color: black;
+	text-decoration: none;
+	width: 15rem;
+	letter-spacing: 1px;
+	border: 2px solid black;
+	margin: 2rem auto 0 auto;
+	&:hover {
+		background-color: rgb(var(--mainDark));
+	}
+`;

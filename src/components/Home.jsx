@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import levels from "../levels.json";
-import { Input, H1, H2 } from "../styles/styledComponents";
+import { Input, H1, H2, Button } from "../styles/styledComponents";
 import classNames from "classnames";
+import { Link } from "react-router-dom";
 
 export default function Home() {
 	const [currentLevel, setCurrentLevel] = useState(
@@ -12,8 +12,6 @@ export default function Home() {
 	const [currentRep, setCurrentRep] = useState(Number(localStorage.getItem("currentRep") ?? 0));
 	const [goal, setGoal] = useState(localStorage.getItem("goal") ?? "exalted");
 	const [perDay, setPerDay] = useState(Number(localStorage.getItem("perDay") ?? 500));
-
-	const { push } = useHistory();
 
 	const levelKeys = Object.keys(levels);
 	const disabledGoals = [];
@@ -53,12 +51,6 @@ export default function Home() {
 
 	function perDayBlurHandler() {
 		if (perDay <= 0) setPerDay(1);
-	}
-
-	function submit() {
-		push(
-			`/result?currentLevel=${currentLevel}&currentRep=${currentRep}&goal=${goal}&perDay=${perDay}`
-		);
 	}
 
 	return (
@@ -126,7 +118,12 @@ export default function Home() {
 					onChange={e => setPerDay(Number(e.target.value))}
 				/>
 			</Grid>
-			<SubmitButton onClick={submit}>Run</SubmitButton>
+			<Button
+				to={`/result?currentLevel=${currentLevel}&currentRep=${currentRep}&goal=${goal}&perDay=${perDay}`}
+				as={Link}
+			>
+				Run
+			</Button>
 		</Container>
 	);
 }
@@ -166,21 +163,6 @@ const SelectBox = styled.button`
 	&[disabled] {
 		color: rgb(50, 50, 50);
 		cursor: not-allowed;
-	}
-`;
-
-const SubmitButton = styled.button`
-	background-color: rgb(var(--main));
-	font-family: "LifeCraft";
-	font-size: 2.5rem;
-	padding: 0.5rem 1rem;
-	border-radius: 0.5rem;
-	width: 15rem;
-	letter-spacing: 1px;
-	border: 2px solid black;
-	margin: 2rem auto 0 auto;
-	&:hover {
-		background-color: rgb(var(--mainDark));
 	}
 `;
 

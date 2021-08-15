@@ -1,8 +1,9 @@
 import { useMemo } from "react";
 import styled from "styled-components";
 import levels from "../levels.json";
-import { H1, H3 } from "../styles/styledComponents";
+import { Button, H1, H3 } from "../styles/styledComponents";
 import CountUp from "react-countup";
+import { Link } from "react-router-dom";
 
 function calculateRep(currentLevel, currentRep, goal, perDay) {
 	const levelsArr = Object.entries(levels);
@@ -42,6 +43,9 @@ export default function Result({ location }) {
 				<CountUp end={days} duration={0.25} />
 				<span> days</span>
 			</ResultHeader>
+			<Button as={Link} to="/">
+				Go back
+			</Button>
 		</Container>
 	);
 }
