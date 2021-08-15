@@ -4,15 +4,12 @@ import styled from "styled-components";
 import levels from "../levels.json";
 
 export default function Home() {
-	const localCurrentLevel = localStorage.getItem("currentLevel") ?? "friendly",
-		localCurrentRep = localStorage.getItem("currentRep") ?? 0,
-		localGoal = localStorage.getItem("goal") ?? "exalted",
-		localPerDay = localStorage.getItem("perDay") ?? 500;
-
-	const [currentLevel, setCurrentLevel] = useState(localCurrentLevel);
-	const [currentRep, setCurrentRep] = useState(Number(localCurrentRep));
-	const [goal, setGoal] = useState(localGoal);
-	const [perDay, setPerDay] = useState(Number(localPerDay));
+	const [currentLevel, setCurrentLevel] = useState(
+		localStorage.getItem("currentLevel") ?? "friendly"
+	);
+	const [currentRep, setCurrentRep] = useState(Number(localStorage.getItem("currentRep") ?? 0));
+	const [goal, setGoal] = useState(localStorage.getItem("goal") ?? "exalted");
+	const [perDay, setPerDay] = useState(Number(localStorage.getItem("perDay") ?? 500));
 
 	const { push } = useHistory();
 
