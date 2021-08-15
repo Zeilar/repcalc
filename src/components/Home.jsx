@@ -15,6 +15,13 @@ export default function Home() {
 
 	const { push } = useHistory();
 
+	const levelKeys = Object.keys(levels);
+	const disabledGoals = [];
+
+	for (let i = 0; i <= levelKeys.indexOf(currentLevel); i++) {
+		disabledGoals.push(levelKeys[i]); // To skip hated
+	}
+
 	useEffect(() => {
 		localStorage.setItem("currentLevel", currentLevel);
 		currentRepBlurHandler();
@@ -32,6 +39,13 @@ export default function Home() {
 		localStorage.setItem("perDay", perDay);
 	}, [perDay]);
 
+	useEffect(() => {
+		const lastDisabledKey = levelKeys[disabledGoals.length];
+		if (levelKeys.indexOf(lastDisabledKey) > levelKeys.indexOf(goal)) {
+			setGoal(lastDisabledKey);
+		}
+	}, [disabledGoals]);
+
 	function currentRepBlurHandler() {
 		const max = levels[currentLevel];
 		if (currentRep > max) setCurrentRep(max - 1);
@@ -46,15 +60,6 @@ export default function Home() {
 			`/result?currentLevel=${currentLevel}&currentRep=${currentRep}&goal=${goal}&perDay=${perDay}`
 		);
 	}
-
-	const levelKeys = Object.keys(levels);
-	const disabledGoals = [];
-
-	for (let i = 0; i <= levelKeys.indexOf(currentLevel); i++) {
-		disabledGoals.push(levelKeys[i]); // To skip hated
-	}
-
-	console.log(disabledGoals);
 
 	return (
 		<Container>
