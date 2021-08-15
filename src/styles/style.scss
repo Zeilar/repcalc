@@ -58,6 +58,8 @@ body {
 	background-color: black;
 	background-image: url("/assets/images/background.png");
 	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center;
 	&::after {
 		background-color: var(--transparent);
 		content: "";

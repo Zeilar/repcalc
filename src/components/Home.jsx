@@ -63,7 +63,7 @@ export default function Home() {
 
 	return (
 		<Container>
-			<H1>How many days do I need to grind?</H1>
+			<SiteHeader>How many days do I need to grind?</SiteHeader>
 			<Grid>
 				<GridHeader>I am currently</GridHeader>
 				<SelectBoxes>
@@ -135,14 +135,15 @@ const Container = styled.div`
 	display: flex;
 	flex-direction: column;
 	padding: 3rem;
-	max-width: 1000px;
+	max-width: 1400px;
 	margin: auto;
 `;
 
 const SelectBoxes = styled.div`
-	display: grid;
-	grid-template-columns: repeat(4, 1fr);
+	display: flex;
 	grid-gap: 0.5rem;
+	justify-content: center;
+	flex-wrap: wrap;
 `;
 
 const SelectBox = styled.button`
@@ -207,4 +208,8 @@ const GridHeader = styled(H2)`
 const PerDayInput = styled(Input)`
 	background-color: var(--transparent);
 	margin: 0 auto;
+`;
+
+const SiteHeader = styled(H1)`
+	margin-bottom: 2rem;
 `;

@@ -29,7 +29,7 @@ export const Input = styled.input`
 `;
 
 export const H1 = styled.h1`
-	font-size: 2.5rem;
+	font-size: 3rem;
 `;
 
 export const H2 = styled.h2`
