@@ -45,16 +45,14 @@ export default function Home() {
 		);
 	}
 
-	function getLevelKeys() {
-		return Object.keys(levels);
-	}
+	const levelKeys = Object.keys(levels);
 
 	return (
 		<Container>
 			<h1>How many days do I need to grind?</h1>
 			<h2>I am currently</h2>
 			<SelectBoxes>
-				{getLevelKeys().map((level, i) => (
+				{levelKeys.map((level, i) => (
 					<SelectBox
 						className={level === currentLevel ? "active" : null}
 						key={i}
@@ -74,7 +72,7 @@ export default function Home() {
 			/>
 			<h2>My goal is</h2>
 			<SelectBoxes>
-				{getLevelKeys().map((level, i) => (
+				{levelKeys.map((level, i) => (
 					<SelectBox
 						className={level === goal ? "active" : null}
 						key={i}
