@@ -3,6 +3,7 @@ import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import levels from "../levels.json";
 import { Input, H1, H2 } from "../styles/styledComponents";
+import classNames from "classnames";
 
 export default function Home() {
 	const [currentLevel, setCurrentLevel] = useState(
@@ -47,6 +48,13 @@ export default function Home() {
 	}
 
 	const levelKeys = Object.keys(levels);
+	const disabledGoals = [];
+
+	for (let i = 0; i <= levelKeys.indexOf(currentLevel); i++) {
+		disabledGoals.push(levelKeys[i]); // To skip hated
+	}
+
+	console.log(disabledGoals);
 
 	return (
 		<Container>
@@ -54,15 +62,18 @@ export default function Home() {
 			<Grid>
 				<GridHeader>I am currently</GridHeader>
 				<SelectBoxes>
-					{levelKeys.map((level, i) => (
-						<SelectBox
-							className={level === currentLevel ? "active" : null}
-							key={i}
-							onClick={() => setCurrentLevel(level)}
-						>
-							{level}
-						</SelectBox>
-					))}
+					{levelKeys.map(
+						(level, i) =>
+							level !== "exalted" && (
+								<SelectBox
+									className={level === currentLevel ? "active" : null}
+									key={i}
+									onClick={() => setCurrentLevel(level)}
+								>
+									{level}
+								</SelectBox>
+							)
+					)}
 				</SelectBoxes>
 				<CurrentRepInput>
 					<Input
@@ -80,15 +91,23 @@ export default function Home() {
 			<Grid>
 				<GridHeader>My goal is</GridHeader>
 				<SelectBoxes>
-					{levelKeys.map((level, i) => (
-						<SelectBox
-							className={level === goal ? "active" : null}
-							key={i}
-							onClick={() => setGoal(level)}
-						>
-							{level}
-						</SelectBox>
-					))}
+					{levelKeys.map(
+						(level, i) =>
+							level !== "hated" && (
+								<SelectBox
+									className={classNames({
+										active: level === goal,
+									})}
+									disabled={disabledGoals.some(
+										disabledGoal => disabledGoal === level
+									)}
+									key={i}
+									onClick={() => setGoal(level)}
+								>
+									{level}
+								</SelectBox>
+							)
+					)}
 				</SelectBoxes>
 			</Grid>
 			<Grid>
@@ -137,6 +156,10 @@ const SelectBox = styled.button`
 	&.active,
 	&:hover {
 		color: rgb(var(--main));
+	}
+	&[disabled] {
+		color: rgb(50, 50, 50);
+		cursor: not-allowed;
 	}
 `;
 
