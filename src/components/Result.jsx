@@ -41,7 +41,7 @@ export default function Result({ location }) {
 			</H3>
 			<ResultHeader>
 				<CountUp end={days} duration={0.25} />
-				<span> days</span>
+				<span> day{days > 1 ? "s" : null}</span>
 			</ResultHeader>
 			<Button as={Link} to="/">
 				Go back
