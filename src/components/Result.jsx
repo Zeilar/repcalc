@@ -39,7 +39,7 @@ export default function Result({ location }) {
 				<HeaderBigParts>{perDay}</HeaderBigParts> reputation per day
 			</H3>
 			<ResultHeader>
-				<CountUp end={days} duration={0.5} />
+				<CountUp end={days} duration={0.25} />
 				<span> days</span>
 			</ResultHeader>
 		</Container>
