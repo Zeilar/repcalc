@@ -4,20 +4,42 @@ import styled from "styled-components";
 import levels from "../levels.json";
 
 export default function Home() {
-	const [currentLevel, setCurrentLevel] = useState("friendly");
-	const [currentRep, setCurrentRep] = useState(0);
-	const [goal, setGoal] = useState("exalted");
-	const [perDay, setPerDay] = useState(500);
+	const localCurrentLevel = localStorage.getItem("currentLevel") ?? "friendly",
+		localCurrentRep = localStorage.getItem("currentRep") ?? 0,
+		localGoal = localStorage.getItem("goal") ?? "exalted",
+		localPerDay = localStorage.getItem("perDay") ?? 500;
+
+	const [currentLevel, setCurrentLevel] = useState(localCurrentLevel);
+	const [currentRep, setCurrentRep] = useState(Number(localCurrentRep));
+	const [goal, setGoal] = useState(localGoal);
+	const [perDay, setPerDay] = useState(Number(localPerDay));
 
 	const { push } = useHistory();
 
 	useEffect(() => {
+		localStorage.setItem("currentLevel", currentLevel);
 		currentRepBlurHandler();
 	}, [currentLevel]);
+
+	useEffect(() => {
+		localStorage.setItem("currentRep", currentRep);
+	}, [currentRep]);
+
+	useEffect(() => {
+		localStorage.setItem("goal", goal);
+	}, [goal]);
+
+	useEffect(() => {
+		localStorage.setItem("perDay", perDay);
+	}, [perDay]);
 
 	function currentRepBlurHandler() {
 		const max = levels[currentLevel];
 		if (currentRep > max) setCurrentRep(max);
+	}
+
+	function perDayBlurHandler() {
+		if (perDay <= 0) setPerDay(1);
 	}
 
 	function submit() {
@@ -50,7 +72,6 @@ export default function Home() {
 				onChange={e => setCurrentRep(Number(e.target.value))}
 				onBlur={currentRepBlurHandler}
 				min={0}
-				max={21000}
 				type="number"
 				value={currentRep}
 			/>
@@ -68,6 +89,8 @@ export default function Home() {
 			</SelectBoxes>
 			<h2 style={{ marginTop: "3rem" }}>I should get this much reputation per day</h2>
 			<input
+				onBlur={perDayBlurHandler}
+				min={1}
 				type="number"
 				value={perDay}
 				placeholder="Per day"
