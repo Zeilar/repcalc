@@ -108,7 +108,7 @@ export default function Home() {
 				</SelectBoxes>
 			</Grid>
 			<Grid>
-				<GridHeader>I should get this much reputation per day</GridHeader>
+				<GridHeader>Reputation per day</GridHeader>
 				<PerDayInput
 					onBlur={perDayBlurHandler}
 					min={1}
