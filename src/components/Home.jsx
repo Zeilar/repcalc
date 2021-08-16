@@ -134,6 +134,9 @@ const Container = styled.div`
 	padding: 3rem;
 	max-width: 1400px;
 	margin: auto;
+	@media (max-width: 768px) {
+		padding: 1rem;
+	}
 `;
 
 const SelectBoxes = styled.div`
